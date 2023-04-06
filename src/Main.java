@@ -1,17 +1,70 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner leitor = new Scanner(System.in);
+        String nome = "André Sant'Ana Boim";
+        double saldo = 2500;
+        int opcao;
+        double valorAReceber;
+        double valorATransferir;
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        System.out.printf(
+             "\n" +
+             "***************************************" +
+             "\n" +
+             "Dados do cliente:" +
+             "\n\n" +
+             "Nome:             " + nome +
+             "\n" +
+             "Tipo conta:       Corrente" +
+             "\n" +
+             "Saldo inicial:    R$%.2f" +
+             "\n" +
+            "***************************************" +
+            "\n", saldo
+            );
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        while (true) {
+            System.out.println("""
+                                    
+                                    
+                    Operações:
+
+                    1- Consultar saldo
+                    2- Receber valor
+                    3- Transferir valor
+                    4- Sair
+                    """);
+            System.out.println("Digite a opção desejada:");
+            opcao = leitor.nextInt();
+
+
+            if (opcao == 1) {
+                System.out.printf("\nO seu saldo atual é de R$%.2f.", saldo);
+            } else if (opcao == 2) {
+                System.out.println("Insira o valor a receber: ");
+                valorAReceber = leitor.nextDouble();
+                System.out.printf("O seu saldo agora é de R$%.2f", saldo + valorAReceber);
+                saldo += valorAReceber;
+            } else if (opcao == 3) {
+                System.out.println("Insira o valor a transferir: ");
+                valorATransferir = leitor.nextDouble();
+                if (valorATransferir > saldo) {
+                    System.out.println("Saldo insuficiente para a transferência.");
+                } else {
+                    System.out.printf("O seu saldo agora é de R$%.2f", saldo - valorATransferir);
+                    saldo -= valorATransferir;
+                }
+            } else if (opcao == 4) {
+                System.out.println("Sessão encerrada.");
+                break;
+            } else {
+                System.out.println("Opção inválida.");
+            }
+
         }
+
+
     }
 }
